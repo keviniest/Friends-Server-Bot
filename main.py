@@ -4,8 +4,12 @@ import discord
 import command
 
 client = discord.Client()  # Creates a client instance
-prefix = '?'
-commands = [command.Info, command.Help]  # List of modules (commands)
+prefix = '?'  # The bot prefix
+# List of modules (commands)
+commands = [
+	command.Info('info'),
+	command.Help('help')
+]
 event = None
 
 
@@ -28,7 +32,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
 	# Don't do anything if message doesn't starts with the prefix
-	if message.content[0] != prefix:
+	if list(message.content)[0] != prefix:
 		return
 
 	global event
@@ -46,7 +50,7 @@ async def on_message(message):
 			# Finds command matching command_name
 			if c.name == command_name:
 				# Calls on_command function in the child with the matching name
-				c.on_command(args=re.split('\\s+', msg)[0:len(re.split('\\s+', msg))], command=msg)
+				c.on_command(args=re.split('\\s+', msg)[0:len(re.split('\\s+', msg))], command=msg, event=message)
 				command_found = True  # Command is found
 				break
 
