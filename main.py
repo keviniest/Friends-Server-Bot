@@ -50,7 +50,7 @@ async def on_message(message):
 			# Finds command matching command_name
 			if c.name == command_name:
 				# Calls on_command function in the child with the matching name
-				c.on_command(args=re.split('\\s+', msg)[0:len(re.split('\\s+', msg))], command=msg, event=message)
+				await c.on_command(re.split('\\s+', msg)[0:len(re.split('\\s+', msg))], msg, message)
 				command_found = True  # Command is found
 				break
 
