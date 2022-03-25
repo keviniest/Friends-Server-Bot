@@ -31,15 +31,14 @@ async def on_ready():
 # This method is called everytime message is received from any of the server that the bot is in.
 @client.event
 async def on_message(message):
-	# Don't do anything if message doesn't starts with the prefix
-	if list(message.content)[0] != prefix:
+	# Don't do anything if message was sent by this bot itself or doesn't start with the prefix
+	if message.author == client.user or list(message.content)[0] != prefix:
 		return
 
 	global event
 	event = message
 	msg = message.content
 	msg = msg[len(prefix):]  # Prefix gets stripped from the message
-	command_found = False  # Checks if command is found
 
 	if len(re.split('\\s+', msg)[0]) > 0:
 		# the name of the command (the first argument without the prefix)
@@ -51,12 +50,7 @@ async def on_message(message):
 			if c.name == command_name:
 				# Calls on_command function in the child with the matching name
 				await c.on_command(re.split('\\s+', msg)[0:len(re.split('\\s+', msg))], msg, message)
-				command_found = True  # Command is found
 				break
-
-	# Command is not found after iterating through the array of commands
-	if not command_found:
-		await message.channel.send("Command not found")
 
 
 client.run(get_token())

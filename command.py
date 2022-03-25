@@ -21,8 +21,8 @@ class Info(Command):
 		super().__init__(name)
 
 	async def on_command(self, args, command, event):
-		embed = discord.Embed(title="Info", description="Information about this bot", color=0xffffff)
-		embed.add_field(name="undefined", value="undefined", inline=False)
+		embed = discord.Embed(title='Info', description='Information about this bot', color=0xffffff)
+		embed.add_field(name='Source code', value='https://github.com/keviniest/Friends-Server-Bot', inline=False)
 		await event.channel.send(embed=embed)
 
 
@@ -32,4 +32,4 @@ class Help(Command):
 		super().__init__(name)
 
 	async def on_command(self, args, command, event):
-		await event.channel.send("`ask ming or smth, idk`")
+		await event.channel.send('`ask ming or smth, idk`')
