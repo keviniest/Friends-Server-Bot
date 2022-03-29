@@ -10,7 +10,6 @@ commands = [
 	command.Info('info'),
 	command.Help('help')
 ]
-event = None
 
 
 # reads and returns content of file called "token.txt"
@@ -35,8 +34,6 @@ async def on_message(message):
 	if message.author == client.user or list(message.content)[0] != prefix:
 		return
 
-	global event
-	event = message
 	msg = message.content
 	msg = msg[len(prefix):]  # Prefix gets stripped from the message
 

@@ -1,6 +1,7 @@
 from abc import abstractmethod
 import discord
 
+
 # This is the parent class where all the children(modules) extends
 class Command:
 	# name of the command
@@ -22,7 +23,9 @@ class Info(Command):
 
 	async def on_command(self, args, command, event):
 		embed = discord.Embed(title='Info', description='Information about this bot', color=0xffffff)
+		embed.add_field(name='Creator', value='Keviniest#9805', inline=False)
 		embed.add_field(name='Source code', value='https://github.com/keviniest/Friends-Server-Bot', inline=False)
+		embed.add_field(name='How to get started', value='?help', inline=False)
 		await event.channel.send(embed=embed)
 
 
@@ -32,4 +35,4 @@ class Help(Command):
 		super().__init__(name)
 
 	async def on_command(self, args, command, event):
-		await event.channel.send('`ask ming or smth, idk`')
+		await event.channel.send('`help ... prints this message\n info ... little info about this bot`')
