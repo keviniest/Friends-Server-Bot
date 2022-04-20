@@ -8,7 +8,11 @@ prefix = '?'  # The bot prefix
 # List of modules (commands)
 commands = [
 	command.Info('info'),
-	command.Help('help')
+	command.Help('help'),
+	command.PpLength('pplength'),
+	command.BitchesCounter('bitchescounter'),
+	command.MaterialGirlness('materialgirlness'),
+	command.EightBall('8ball')
 ]
 
 
@@ -33,6 +37,10 @@ async def on_message(message):
 	# Don't do anything if message was sent by this bot itself or doesn't start with the prefix
 	if message.author == client.user or list(message.content)[0] != prefix:
 		return
+
+	if message.guild.id == 888038527550521384:
+		if message.channel.id != 893262564530720799:
+			return
 
 	msg = message.content
 	msg = msg[len(prefix):]  # Prefix gets stripped from the message
