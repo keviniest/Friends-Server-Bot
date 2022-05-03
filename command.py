@@ -61,7 +61,7 @@ class BitchesCounter(Command):
 	async def on_command(self, args: list, command: str, event):
 		bitches_count = random.randint(0, 100)
 		if len(args) == 1:
-			if args[1] == "<@!640892808105820162>":
+			if args[0] == "<@!640892808105820162>":
 				await event.channel.send(f"{args[1]} will get 0 bitches in their lifetime")
 			else:
 				await event.channel.send(f"{args[1]} will get {bitches_count} bitches in their lifetime")
@@ -111,3 +111,20 @@ class EightBall(Command):
 		]
 		number = random.randint(0, len(temps) - 1)
 		await event.channel.send(temps[number])
+
+
+class BanWord(Command):
+	def __init__(self, name):
+		super(BanWord, self).__init__(name)
+
+	async def on_command(self, args: list, command: str, event):
+		if args[1] == 'print':
+			with open('BanWords.txt') as f:
+				body: str = 'word, moderation_level\n'
+				for i in f.read().splitlines():
+					body += f'{i}\n'
+				await event.channel.send(body)
+		elif args[1] == 'add':
+			pass
+		elif args[1] == 'remove':
+			pass
